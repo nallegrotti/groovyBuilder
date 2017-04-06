@@ -18,3 +18,9 @@ task testReports(type: Exec) {
   executable "open"
   args "./build/reports/tests/test/index.html"
 }
+
+task examples(type: Exec) {
+    workingDir './src/main/groovy'
+    executable 'groovy'
+    args 'example.groovy'
+}
