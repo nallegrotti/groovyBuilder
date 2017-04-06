@@ -1,4 +1,5 @@
 class MockBuilder{
+
     public static Object build(Class c, model){
         def r = c.newInstance()
         def doNotTouch = ['metaClass', '$staticClassInfo', '__$stMC', '$callSiteArray']
@@ -18,6 +19,8 @@ class MockBuilder{
                     r[it.name] = BigDecimal.ZERO
                 }else if (it.type.isCase([])){
                     r[it.name] = []
+                }else if (it.type.isEnum()) {
+                    r[it.name] = it.type.MIN_VALUE
                 }else {
                     r[it.name] = it.type.build()
                 }

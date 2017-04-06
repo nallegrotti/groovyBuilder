@@ -4,8 +4,7 @@ import JSON
 class Persona{
     String nombre
     String apellido 
-    String tipoDoc
-    Integer nroDoc
+    Document document
 }
 
 class Libro {
@@ -20,6 +19,15 @@ class Bibloteca {
 	Collection<Libro> libros
 }
 
+enum DocumentType {
+    DNI, LC, LE, CI
+}
+
+class Document {
+    Integer number
+    DocumentType type
+}
+
 use(MockBuilder, JSON){
     def unLibro = Libro.build(
 		titulo: 'Mi libro', 
@@ -32,4 +40,8 @@ use(MockBuilder, JSON){
     biblioteca.libros << unLibro
 
     println biblioteca.json
+
+    println Libro.build().json
+
+    println Document.build().json
 }
