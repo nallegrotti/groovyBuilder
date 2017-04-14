@@ -1,10 +1,64 @@
-version '0.0.1'
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    }
+}
+
+plugins {
+    id "com.jfrog.bintray" version "1.7.3"
+    id "nebula.gradle-scm" version "2.2.0"
+}
 
 apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+
+version '0.1.0'
+group = 'testing.tools'
 
 repositories {
     mavenCentral()
     jcenter()
+
+    maven { url "http://dl.bintray.com/nallegrotti/testing-tools" } 
+}
+
+task sourceJar(type: Jar) {
+  classifier "sources"
+}
+
+publishing { 
+    publications { 
+        MockBuilder(MavenPublication) { 
+            artifact jar
+        } 
+    } 
+} 
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+
+    publications = ['MockBuilder']
+
+    pkg {
+        repo = 'testing-tools'
+        name = 'mock-builder'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/nallegrotti/groovyBuilder.git'
+
+        githubRepo = 'nallegrotti/groovyBuilder' 
+        githubReleaseNotesFile = 'README.md'
+
+        version {
+            name = project.version
+            desc = 'Start building mocks for model objects without pain'
+            released  = new Date()
+            vcsTag = project.version
+        }
+    }
 }
 
 dependencies {
