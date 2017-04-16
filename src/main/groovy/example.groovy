@@ -23,6 +23,20 @@ enum DocumentType {
     DNI, LC, LE, CI
 }
 
+enum EnumComplexType {
+    FIRST_VALUE("first", 1),
+    SECOND_VALUE("second", 2),
+    LAST_VALUE('last', 1000)
+
+    String name
+    Integer value
+
+    EnumComplexType(name, value){
+        this.name = name
+        this.value = value
+    }
+}
+
 class Document {
     Integer number
     DocumentType type
@@ -44,4 +58,6 @@ use(MockBuilder, JSON){
     println Libro.build().json
 
     println Document.build().json
+
+    println EnumComplexType.values()[0].dump()
 }

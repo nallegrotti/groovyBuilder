@@ -4,8 +4,29 @@ class Simple {
 	String aString
 	Integer anInt
 	Double aDouble
+	Boolean aBoolean
 	BigDecimal aDecimalNumber
 	Collection<String> someCollection
+	EnumType anEnum
+	EnumComplexType aComplexEnum
+}
+
+enum EnumType {
+    FIRST_VALUE, SECOND_VALUE, LAST_VALUE
+}
+
+enum EnumComplexType {
+	FIRST_VALUE("first", 1),
+    SECOND_VALUE("second", 2),
+    LAST_VALUE('last', 1000)
+
+	String name
+	Integer value
+
+	EnumComplexType(name, value){
+		this.name = name
+		this.value = value
+	}
 }
 
 class BuilderSpec  extends spock.lang.Specification {
@@ -21,8 +42,11 @@ class BuilderSpec  extends spock.lang.Specification {
 			b.aString != null
 			b.anInt != null 
 			b.aDouble != null
+			b.aBoolean != null
 			b.aDecimalNumber != null
 			b.someCollection == []
+			b.anEnum != null
+			b.aComplexEnum != null
 	}
 
 	def "can build a simple class with prototype values"() {

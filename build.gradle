@@ -15,7 +15,7 @@ plugins {
 apply plugin: 'groovy'
 apply plugin: 'maven-publish'
 
-version '0.1.2'
+version '0.1.3'
 group = 'testing.tools'
 
 repositories {

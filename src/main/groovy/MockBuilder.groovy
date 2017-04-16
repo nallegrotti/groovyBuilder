@@ -17,12 +17,14 @@ class MockBuilder{
                     r[it.name] = 0
                 }else if (it.type.isCase(0D)){
                     r[it.name] = 0D
+                }else if (it.type.isCase(false)){
+                    r[it.name] = false
                 }else if (it.type == BigDecimal){
                     r[it.name] = BigDecimal.ZERO
                 }else if (it.type.isCase([])){
                     r[it.name] = []
                 }else if (it.type.isEnum()) {
-                    r[it.name] = it.type.MIN_VALUE
+                    r[it.name] = it.type.values()[0]
                 }else {
                     r[it.name] = it.type.build()
                 }
