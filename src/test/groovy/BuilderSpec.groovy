@@ -3,6 +3,7 @@ import MockBuilder
 class Simple {
 	String aString
 	Integer anInt
+	Double aDouble
 	BigDecimal aDecimalNumber
 	Collection<String> someCollection
 }
@@ -19,6 +20,7 @@ class BuilderSpec  extends spock.lang.Specification {
 		then: "The object gets default values of every attribute"
 			b.aString != null
 			b.anInt != null 
+			b.aDouble != null
 			b.aDecimalNumber != null
 			b.someCollection == []
 	}
