@@ -3,12 +3,17 @@ import MockBuilder
 class Simple {
 	String aString
 	Integer anInt
+	Long aLong
+	long aPrimitiveLong
 	Double aDouble
 	Boolean aBoolean
 	BigDecimal aDecimalNumber
 	Collection<String> someCollection
 	EnumType anEnum
 	EnumComplexType aComplexEnum
+	Map<String, Integer> aMap
+
+	final Long aFinalLong = 10L;
 }
 
 enum EnumType {
@@ -41,12 +46,16 @@ class BuilderSpec  extends spock.lang.Specification {
 		then: "The object gets default values of every attribute"
 			b.aString != null
 			b.anInt != null 
+			b.aLong != null
+			b.aPrimitiveLong == 0
 			b.aDouble != null
 			b.aBoolean != null
 			b.aDecimalNumber != null
 			b.someCollection == []
 			b.anEnum != null
 			b.aComplexEnum != null
+			b.aFinalLong == 10L
+			b.aMap != null
 	}
 
 	def "can build a simple class with prototype values"() {

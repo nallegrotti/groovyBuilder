@@ -1,5 +1,6 @@
 import MockBuilder
 import JSON
+import java.lang.reflect.Modifier;
 
 class Persona{
     String nombre
@@ -37,6 +38,19 @@ enum EnumComplexType {
     }
 }
 
+class Primitivos {
+    int i 
+    long l 
+    boolean b 
+    double d
+}
+
+class Finals {
+    final static int i_sf = 1;
+    final int i_f = 2;
+    int i = 3;
+}
+
 class Document {
     Integer number
     DocumentType type
@@ -60,4 +74,12 @@ use(MockBuilder, JSON){
     println Document.build().json
 
     println EnumComplexType.values()[0].dump()
+
+    Primitivos.declaredFields.each{ f -> 
+        println "$f.type -> ${f.type.isCase(0)} || ${f.type in [int]}"
+    }
+    
+    Finals.declaredFields.each{ f -> 
+        println "${f.modifiers & Modifier.FINAL}"
+    }
 }

@@ -1,3 +1,5 @@
+import java.lang.reflect.Modifier;
+
 class MockBuilder{
 
     public static Object build(Class c, model){
@@ -10,11 +12,17 @@ class MockBuilder{
         }
 
         c.declaredFields.each{
-            if (!(it.name in doNotTouch)){
+            if (!(it.name in doNotTouch) && !(it.modifiers & Modifier.FINAL)){
                 if (it.type == String){
                     r[it.name] = it.name
+                }else if (it.type in [long, int]){
+                    r[it.name] = 0
+                }else if (it.type.isCase([:])){
+                    r[it.name] = [:]
                 }else if (it.type.isCase(0)){
                     r[it.name] = 0
+                }else if (it.type.isCase(0L)){
+                    r[it.name] = 0L
                 }else if (it.type.isCase(0D)){
                     r[it.name] = 0D
                 }else if (it.type.isCase(false)){
