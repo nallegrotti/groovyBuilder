@@ -4,7 +4,7 @@ class MockBuilder{
 
     public static Object build(Class c, model){
         def r = c.newInstance()
-        def doNotTouch = ['metaClass', '$staticClassInfo', '__$stMC', '$callSiteArray']
+        def doNotTouch = ['metaClass', '$staticClassInfo', '__$stMC', '$callSiteArray', 'includeMetadata']
 
         model.each{ k, v -> 
             r[k] = v
@@ -15,6 +15,8 @@ class MockBuilder{
             if (!(it.name in doNotTouch) && !(it.modifiers & Modifier.FINAL)){
                 if (it.type == String){
                     r[it.name] = it.name
+                }else if (it.type == Date){
+                    r[it.name] = new Date()
                 }else if (it.type in [long, int]){
                     r[it.name] = 0
                 }else if (it.type.isCase([:])){

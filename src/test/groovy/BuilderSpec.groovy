@@ -12,6 +12,7 @@ class Simple {
 	EnumType anEnum
 	EnumComplexType aComplexEnum
 	Map<String, Integer> aMap
+	Date aDate
 
 	final Long aFinalLong = 10L;
 }
@@ -56,6 +57,7 @@ class BuilderSpec  extends spock.lang.Specification {
 			b.aComplexEnum != null
 			b.aFinalLong == 10L
 			b.aMap != null
+			b.aDate != null
 	}
 
 	def "can build a simple class with prototype values"() {
