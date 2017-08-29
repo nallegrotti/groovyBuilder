@@ -17,7 +17,7 @@ class MockBuilder{
                     r[it.name] = it.name
                 }else if (it.type == Date){
                     r[it.name] = new Date()
-                }else if (it.type in [long, int]){
+                }else if (it.type in [long, int, double]){
                     r[it.name] = 0
                 }else if (it.type.isCase([:])){
                     r[it.name] = [:]
@@ -27,7 +27,7 @@ class MockBuilder{
                     r[it.name] = 0L
                 }else if (it.type.isCase(0D)){
                     r[it.name] = 0D
-                }else if (it.type.isCase(false)){
+                }else if (it.type.isCase(false) || it.type in [boolean]){
                     r[it.name] = false
                 }else if (it.type == BigDecimal){
                     r[it.name] = BigDecimal.ZERO

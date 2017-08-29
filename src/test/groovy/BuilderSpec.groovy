@@ -6,7 +6,9 @@ class Simple {
 	Long aLong
 	long aPrimitiveLong
 	Double aDouble
+	double aPrimitiveDouble
 	Boolean aBoolean
+	boolean aPrimitiveBoolean
 	BigDecimal aDecimalNumber
 	Collection<String> someCollection
 	EnumType anEnum
